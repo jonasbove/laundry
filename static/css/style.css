@@ -1,0 +1,173 @@
+* {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font-family: 'Arial';
+}
+body {
+    background: #111;
+    color: white;
+}
+header {
+    display: flex;
+    gap: 1rem;
+    padding: 0 1rem;
+}
+nav {
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+nav a {
+    padding: 0.5rem;
+    color: white;
+}
+header button {
+    background-color: #111;
+    color: white;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    height: 2rem;
+    margin-left: auto;
+}
+header button:hover {
+    cursor: not-allowed;
+}
+h1 {
+    text-align: center;
+    margin: 0 1rem;
+    align-self: center;
+}
+.centered {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.weeks {
+    margin: 1rem;
+}
+.weeks button {
+    padding: 0.5rem 2rem;
+}
+.booking-schedule {
+    display: grid;
+    grid-template-columns: repeat(22, 1fr);
+    grid-template-rows: repeat(26, 30px);
+    gap: 1px;
+    text-align: center;
+    width: 1100px;
+}
+.date, .weekday {
+    grid-column: 3 span;
+}
+.date-monday, .monday {
+    grid-column: 2 / 3 span;
+}
+.interval {
+    justify-self: flex-end;
+    padding: 0 0.5rem;
+}
+.booking-schedule button {
+    border: 0;
+    border-radius: 0;
+    background-color: #eee;
+}
+.booking-schedule button:hover {
+    cursor: pointer;
+    filter: brightness(1.05);
+}
+.booking-schedule > * {
+    height: 30px;
+}
+button[data-day="1"] {
+    background-color: #d6e6ff;
+}
+
+button[data-day="2"] {
+    background-color: #d7f9f8;
+}
+
+button[data-day="3"] {
+    background-color: #ffffea;
+}
+
+button[data-day="4"] {
+    background-color: #fff8df;
+}
+
+button[data-day="5"] {
+    background-color: #fff0d4;
+}
+
+button[data-day="6"] {
+    background-color: #fbe0e0;
+}
+
+button[data-day="7"] {
+    background-color: #e5d4ef;
+}
+button[data-interval="00-01"],
+button[data-interval="02-03"],
+button[data-interval="04-05"],
+button[data-interval="06-07"],
+button[data-interval="08-09"],
+button[data-interval="10-11"],
+button[data-interval="12-13"],
+button[data-interval="14-15"],
+button[data-interval="16-17"],
+button[data-interval="18-19"],
+button[data-interval="20-21"],
+button[data-interval="22-23"] {
+    filter: brightness(0.95);
+}
+
+#book {
+    padding: 1rem 3rem;
+    margin: 1rem;
+    font-weight: 700;
+}
+
+input#apartment {
+    width: 3ch;
+    font-size: 1.25rem;
+    appearance: textfield;
+    margin: 1rem;
+    padding: 1rem 3ch;
+    margin-left: 0.5rem;
+    color: #111;
+}
+
+#book {
+    color: #111;
+    background-color: darkgray;
+    font-size: 2rem;
+}
+
+#book:hover {
+cursor: not-allowed;
+}
+
+#book.greenlit {
+    background-color: #44ff88;
+}
+
+#book.greenlit:hover {
+    cursor: pointer;
+}
+
+label[for="apartment"] {
+    font-size: 2rem;
+    margin: 1rem 0;
+    padding: 1rem 0;
+}
+
+button.slot.reserved {
+    background: #f66;
+    color: #111;
+    font-weight: 700;
+}
+
+button.slot.reserved:hover {
+    cursor: not-allowed;
+}

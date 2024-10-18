@@ -1,9 +1,28 @@
 {% extends "layout.html" %}
-
-{% block title %}Laundry Reservation System{% endblock %}
+{% if locale %}
+    {% block locale %}{{ locale }}{% endblock %}
+{% endif %}
+{% block title %}{{ 32 | localize(locale=locale) }}: {{ 4 | localize(locale=locale) }}{% endblock %}
 
 {% block content %}
 
-<h1>My reservations</h1>
+<h1>{{ 4 | localize(locale=locale) }} ({{ 34 | localize(locale=locale) }} {{apartment}})</h1>
+{% for weekreservation in reservations %}
+    {% if loop.first or weekreservation.week != reservations[loop.index0 - 1].week %}
+        <div class="reservation-week">
+            <h1>{{ 23 | localize(locale=locale) }} {{ weekreservation.week }}</h1>
+            {% for dayreservation in reservations if dayreservation.week == weekreservation.week %}
+                <div class="reservation-day">
+                    <p>{{ dayreservation.day | format_day() }}, {{ 33 | localize(locale=locale) }} {{dayreservation.machine}}, {{dayreservation.interval | format_interval}}</p>
+                    <button onclick="cancelReservation(event)" class="cancel-reservation"><span data-id="{{dayreservation.id}}" class="material-icons" title="{{ 35 | localize(locale=locale) }}">delete</span></button>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+{% endfor %}
+<div class="centered">
+    <button class="cancel-all-reservations" onclick="cancelAllReservations()">{{ 36 | localize(locale=locale) }}</button>
+</div>
 
+<script src="{{ url_for('static', filename='js/reservations.js') }}"></script>
 {% endblock %}

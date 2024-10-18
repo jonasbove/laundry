@@ -9,5 +9,4 @@ class Reservation(Base):
     interval = Column(Integer, nullable=False)
     machine = Column(Integer, nullable=False)
     apartment = Column(Integer, nullable=False)
-    week = Column(Integer, nullable=True)
-    year = Column(Integer, nullable=True)
+    week = Column(Integer, nullable=False)

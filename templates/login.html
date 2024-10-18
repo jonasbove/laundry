@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Laundry Reservation System{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/icon.png') }}" type="image/png">
+    <script src="{{ url_for('static', filename='js/authorization.js') }}"></script>
+</head>
+<body>
+    <div class="login">
+        <h1>Password</h1>
+        <input type="password" id="password">
+        <button type="submit" onclick="login()">Enter</button>
+    </div>
+</body>
+</html>

@@ -39,13 +39,16 @@ function validateApartment() {
 
 function bookSlots() {
     const apartment = document.getElementById('apartment').value;
+    const week = document.getElementById('week').dataset.week;
     if (reservations.length === 0) {
         alert("You haven't selected any reservation slots.");
     }
     else if (apartment === '') {
         alert("You haven't typed in your apartment number.");
-    } else if (validateApartment(apartment)) {
+    } else {
+        preferences['apartment'] = apartment;
         const data = {
+            week: week,
             apartment: apartment,
             reservations: reservations
         };
@@ -54,11 +57,11 @@ function bookSlots() {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(data   )
+            body: JSON.stringify(data)
         })
         .then(response => response.json())
         .then(data => {
-            alert('Reservations saved successfully');
+            alert('Your reservations were saved.');
             console.log('Success:', data);
             location.reload(true);
         })
@@ -68,15 +71,34 @@ function bookSlots() {
     }
 }
 
-function updateReservedSlots(data) {
+async function fetchFromAPI(resource) {
+    try {
+        const response = await fetch(`/api/${resource}`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(`Error fetching ${resource}:`, error);
+    }
+}
+
+async function fetchFromAPIFilter(resource, filter) {
+    try {
+        const response = await fetch(`/api/${resource}/${filter}`);
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error(`Error fetching ${resource}/${filter}:`, error);
+    }
+}
+
+async function updateReservedSlots() {
+    const week = document.getElementById('week').dataset.week;
+    const data = await fetchFromAPIFilter('reservations', week);
     data.forEach(function(reservation) {
         const selector = `.slot[data-interval="${reservation.interval}"][data-machine="${reservation.machine}"][data-day="${reservation.day}"]`;
         const slot = document.querySelector(selector);
-
-        if (slot) {
-            slot.classList.add('reserved');
-            slot.textContent = reservation.apartment;
-            slot.setAttribute('disabled', 'true');
-        }
+        slot.classList.add('reserved');
+        slot.textContent = reservation.apartment;
+        slot.setAttribute('disabled', 'true');
     });
 }

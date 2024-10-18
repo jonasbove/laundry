@@ -1,9 +1,10 @@
 {% extends "layout.html" %}
-
-{% block title %}Laundry Reservation System{% endblock %}
-
+{% if locale %}
+    {% block locale %}{{ locale }}{% endblock %}
+{% endif %}
+{% block title %}{{ 32 | localize(locale=locale) }}: {{ 2 | localize(locale=locale) }}{% endblock %}
 {% block content %}
 
-<h1>Laundry Reservation System</h1>
+<h1>{{ 1 | localize(locale=locale) }}</h1>
 
 {% endblock %}

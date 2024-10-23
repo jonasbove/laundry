@@ -2,12 +2,14 @@ from flask import Flask, render_template, session, current_app, request, redirec
 from models import SessionLocal
 from models.reservation import Reservation
 from datetime import datetime, time, timedelta
+from user_agents import parse
 import secrets
-import locale as python_locale
 import json
 import pytz
 import os
+from dotenv import load_dotenv
 
+load_dotenv('.env')
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
 app.config['SESSION_COOKIE_SAMESITE'] = 'Strict'
@@ -16,7 +18,7 @@ app.config['TEMPLATES_AUTO_RELOAD'] = True
 app.config['FLASK_ENV']= 'development'
 app.jinja_env.cache = {}
 db_session = SessionLocal()
-PASSWORD = '1234' # SAVE THE REAL PASSWORD SOMEWHERE ELSE!
+PASSWORD = os.getenv('PASSWORD')
 SUPPORTED_LOCALES = ['en', 'da']
 
 def reservation_to_dict(reservation):
@@ -37,11 +39,9 @@ def get_week_dates(timezone, target_week):
     target_sunday = target_monday + timedelta(days=6)
     locale = session.get('locale')
     if locale == 'da':
-        python_locale.setlocale(python_locale.LC_TIME, 'da_DK.UTF-8')
         formatted_monday = target_monday.strftime("%d. %B")
         formatted_sunday = target_sunday.strftime("%d. %B")
     else:
-        python_locale.setlocale(python_locale.LC_TIME, 'en_US.UTF-8')
         formatted_monday = target_monday.strftime("%B %d")
         formatted_sunday = target_sunday.strftime("%B %d")
     return formatted_monday, formatted_sunday
@@ -250,6 +250,16 @@ def login():
     
     return render_template('login.html')
 
+
+@app.route('/devicetest')
+def devicetest():
+    user_agent = request.headers.get('User-Agent')
+    parsed_user_agent = parse(user_agent)
+    if parsed_user_agent.is_mobile:
+        return "Hello, mobile user!"
+    else:
+        return "Hello, desktop user!"
+    
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))
-    app.run(host='0.0.0.0', port=port)
+    app.run(host='0.0.0.0', port=port, debug=True)

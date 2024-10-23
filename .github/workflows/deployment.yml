@@ -19,5 +19,5 @@ jobs:
           -H "Authorization: Token ${{ secrets.PYTHONANYWHERE_API_TOKEN }}" \
           -H "Content-Type: application/json" \
           --data '{"input": "cd /home/yard15laundry/laundry && git pull\n"}'
-          curl -X POST "https://www.eu.pythonanywhere.com/api/v0/user/${{ secrets.PYTHONANYWHERE_USERNAME }}/webapps/${{ secrets.PYTHONANYWHERE_USERNAME }}/reload/" \
+          curl -X POST "https://www.eu.pythonanywhere.com/api/v0/user/${{ secrets.PYTHONANYWHERE_USERNAME }}/webapps/${{ secrets.PYTHONANYWHERE_USERNAME }}.eu.pythonawywhere.com/reload/" \
           -H "Authorization: Token ${{ secrets.PYTHONANYWHERE_API_TOKEN }}"

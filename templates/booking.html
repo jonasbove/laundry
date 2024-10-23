@@ -12,7 +12,7 @@
     </form>
     <div class="weekpicker">
         <h1 id="week" data-week="{{week}}">{{ 23 | localize(locale=locale) }} {{ week }}</h1>
-        <p class="weekdates">{{ week_start }} - {{ week_end }}</p>
+        <p class="weekdates">{{ week | format_week_interval('start') }} - {{ week | format_week_interval('end') }}</p>
     </div>
     <form action="{{ url_for('booking') }}" method="get">
         <input type="hidden" name="week" value="{{ week + 1 }}">
@@ -35,7 +35,7 @@
         {% endfor %}
     {% endfor %}
     {% for interval in range(0, 24) %}
-        <p class="interval">{{ intervals[interval][0] | format_time() }} - {{ intervals[interval][1] | format_time() }}</p>
+        <p class="interval">{{ interval | format_interval() }}</p>
         {% for day in range (1, 8) %}
             {% for machine in range (1, 4) %}
                     <button

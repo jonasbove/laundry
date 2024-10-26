@@ -3,12 +3,9 @@
     "2": "Hjem",
     "3": "Reservation",
     "4": "Mine vasketider",
-    "5": "Gårdnummer",
+    "5": "Indstillinger",
     "6": "Interval",
-    "7": {
-        "singular": "Interval",
-        "plural": "Intervaller"
-    },
+    "7": "Gårdnummer",
     "8": "Reserver",
     "9": "Tider",
     "10": "Reserver vasketider",
@@ -37,5 +34,7 @@
     "33": "maskine",
     "34": "Lejlighed",
     "35": "Annuller vasketid",
-    "36": "Annuller alle vasketider"
+    "36": "Annuller alle vasketider",
+    "37": "Fra",
+    "38": "Til"
 }

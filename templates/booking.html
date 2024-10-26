@@ -54,7 +54,7 @@
 </div>
 <div class="centered">
     <label for="apartment">{{ 12 | localize(locale=locale) }}:</label>
-    <input type="number" min="140" max ="160" length="3" name="apartment" id="apartment" {% if apartment %}value="{{apartment}}"{% endif %}]>
+    <input type="number" min="140" max ="160" length="3" name="apartment" id="apartment" {% if apartment %}value="{{apartment}}"{% endif %}>
     <button type="submit" id="book" onclick="setApartmentPreference();bookSlots()">{{ 10 | localize(locale=locale) }}</button>
 </div>
 <script src="{{ url_for('static', filename='js/booking.js') }}"></script>

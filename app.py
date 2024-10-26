@@ -51,6 +51,10 @@ def get_week_dates(timezone, target_week):
     pylocale.setlocale(pylocale.LC_TIME, 'C')
     return formatted_monday, formatted_sunday
 
+def get_weekday_date(timezone, week, day):
+    # TODO: Finish function (for mobile booking page)
+    return
+    
 def week_cap(current_week: int, week: int):
     if (week > current_week+2):
         week = current_week+2
@@ -106,6 +110,13 @@ def booking():
         apartment = session.get('apartment', False)
         timezone = pytz.timezone('Europe/Copenhagen')
         week_start, week_end = get_week_dates(timezone, week)
+        user_agent = request.headers.get('User-Agent')
+        parsed_user_agent = parse(user_agent)
+        if parsed_user_agent.is_mobile:
+            today = int(datetime.now(timezone).isoweekday())
+            day = int(request.args.get('day', default=today, type=int))
+            
+            return render_template('booking_mobile.html', active='booking', reservations=reservations, week=week, week_start=week_start, week_end=week_end, apartment=apartment, locale=get_locale(), session=session_check(), day=day)
         return render_template('booking.html', active='booking', reservations=reservations, week=week, week_start=week_start, week_end=week_end, apartment=apartment, locale=get_locale(), session=session_check())
     else:
         return redirect('/login')
@@ -121,7 +132,11 @@ def reservations():
         return render_template('reservations.html', active='reservations', reservations=reservations, apartment=apartment)
     else:
         return redirect('/login')
-    
+   
+@app.route("/settings")
+def settings():
+    return 'Not made yet lol' 
+
 @app.route("/robots.txt")
 def robots_txt():
     return send_from_directory(app.static_folder, "robots.txt")
@@ -235,7 +250,7 @@ def format_time_filter(value):
     return formatted_time
 
 @app.template_filter('format_interval')
-def format_interval_filter(value):
+def format_interval_filter(value, position=None):
     locale = get_locale()
     start = time(int(value), 0).strftime("%H:%M")
     end = time((int(value)+1)%24, 0).strftime("%H:%M")
@@ -243,7 +258,10 @@ def format_interval_filter(value):
     if locale != 'da':
         start = time(int(value), 0).strftime("%I %p")
         end = time((int(value)+1)%24, 0).strftime("%I %p")
-
+    if position == 'start':
+        return start
+    elif position == 'end':
+        return end
     return f'{start} - {end}'
 
 @app.template_filter('format_day')

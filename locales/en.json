@@ -3,12 +3,9 @@
     "2": "Home",
     "3": "Booking",
     "4": "My reservations",
-    "5": "Yard number",
+    "5": "Settings",
     "6": "Interval",
-    "7": {
-        "singular": "Interval",
-        "plural": "Intervals"
-    },
+    "7": "Yard number",
     "8": "Book",
     "9": "Slots",
     "10": "Book slots",
@@ -37,5 +34,7 @@
     "33": "machine",
     "34": "Apartment",
     "35": "Cancel reservation",
-    "36": "Cancel all reservations"
+    "36": "Cancel all reservations",
+    "37": "From",
+    "38": "To"
 }

@@ -1,0 +1,47 @@
+{% extends "layout_mobile.html" %}
+{% if locale %}
+    {% block locale %}{{ locale }}{% endblock %}
+{% endif %}
+{% block title %}{{ 32 | localize(locale=locale) }}: {{ 2 | localize(locale=locale) }}{% endblock %}
+{% block content %}
+<main>
+    <header>
+        <h2 id="week" data-week="{{week}}">{{ 23 | localize(locale=locale) }} {{ week }}</h2>
+        <p>WEEKDAY DATE</p>
+        <h2>{{day | format_day }}</h2>
+    </header>
+    <section class="annotations">
+        <p>{{ 37 | localize(locale=locale) }}</p>
+        <p>1</p>
+        <p>2</p>
+        <p>3</p>
+        <p>{{ 38 | localize(locale=locale) }}</p>
+    </section>
+    <section class="slots">
+        {% for interval in range(0, 24) %}
+            <p class="interval">{{ interval | format_interval(position='start') }}</p>
+            {% for machine in range (1, 4) %}
+                    <button
+                        class="slot"
+                        data-interval="{{interval}}"
+                        data-machine="{{machine}}"
+                        data-day="{{day}}"
+                        onclick="addSlot(event)"
+                    >
+                    &nbsp;
+                    </button>
+            {% endfor %}
+            <p class="interval">{{ interval | format_interval(position='end') }}</p>
+        {% endfor %}
+    </section>
+        <h3 class="apartment">{{ 34 | localize(locale=locale) }} {% if apartment %}{{apartment}}{% else %}#{% endif %}</h3>
+        <input type="hidden" name="apartment" id="apartment" {% if apartment %}value="{{apartment}}"{% endif %}>
+        <button type="submit" id="book" onclick="setApartmentPreference();bookSlots()">{{ 10 | localize(locale=locale) }}</button>
+</main>
+<script src="{{ url_for('static', filename='js/booking.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        updateReservedSlots();
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,145 @@
+@import url("colors.css");
+
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background: var(--background);
+    color: var(--primary);
+    font-family: 'IBM Plex Sans';
+}
+main {
+    height: 94vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+header {
+    display: flex;
+    width: 100%;
+    margin-bottom: 0.5rem;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 0.2rem solid var(--primary);
+}
+header > * {
+    padding: 0.5rem;
+    text-align: center;
+}
+header p {
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+nav {
+    position: absolute;
+    width: 100%;
+    height: 6vh;
+    bottom: 0rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    border-top: 0.2rem solid var(--primary);
+}
+nav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 25%;
+    height: 100%;
+    color: var(--primary);
+    text-decoration: none;
+}
+nav a.active {
+    background: var(--primary);
+    color: var(--background);
+    font-weight: 700;
+}
+nav a p {
+    font-size: 0.6rem;
+    margin: 0.1rem;
+    font-family: 'IBM Plex Sans';
+    text-align: center;
+}
+
+nav a span.material-icons {
+    font-size: 1.5rem;
+}
+.annotations {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 1.5rem;
+}
+.annotations p {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.slots {
+    overflow: scroll;
+    flex-grow: 1;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    justify-content: space-evenly;
+    align-items: center;
+    grid-gap: 2px;
+}
+.interval {
+    text-align: center;
+}
+.slot {
+    background: var(--slot);
+    padding: 1rem;
+    height: 1.5rem;
+    border: 0;
+}
+.reserved {
+    background-color: var(--red) !important;
+    color: white;
+    font-weight: 500;
+    font-size: 1.25rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.marked {
+    background-color: var(--marker) !important;
+}
+.apartment {
+    padding: 0.6rem 0;
+}
+#book {
+    padding: 0.5rem;
+    margin: 0.25rem 1rem 1rem 1rem;
+    width: calc(100% - 1.5rem);
+    background: grey;
+    color: lightgray;
+    font-size: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: 0;
+}
+.greenlit {
+    background-color: var(--green) !important;
+    color: var(--color-light) !important;
+}
+
+button[data-interval="1"],
+button[data-interval="3"],
+button[data-interval="5"],
+button[data-interval="7"],
+button[data-interval="9"],
+button[data-interval="11"],
+button[data-interval="13"],
+button[data-interval="15"],
+button[data-interval="17"],
+button[data-interval="19"],
+button[data-interval="21"],
+button[data-interval="23"] {
+    background: var(--slot-light);
+}

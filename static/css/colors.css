@@ -1,0 +1,37 @@
+:root {
+    --color-light: #F2EFE9;
+    --color-dark: #252627;
+    --color-green: #4E906F;
+    --color-red: #904E55;
+    --color-sand: #BFB48F;
+    --color-green-light: #7DE8B3;
+    --color-red-light: #E87D88;
+    --color-sky: #9EBDFA;
+    --color-tile: #504E58;
+    --color-tile-light: #5D5B67;
+    --color-tile-dark: #45434C;
+    --color-stone: #CFCED4;
+    --color-stone-light: #DAD9DD;
+    --color-stone-dark: #C5C4CA;
+}
+body.dark-mode {
+    --background: var(--color-dark);
+    --primary: var(--color-light);
+    --green: var(--color-green);
+    --red: var(--color-red);
+    --marker: var(--color-sand); 
+    --slot: var(--color-tile);
+    --slot-light: var(--color-tile-light);
+    --slot-dark: var(--color-tile-dark);
+}
+body.light-mode {
+    --background: var(--color-light);
+    --primary: var(--color-dark);
+    --green: var(--color-green-light);
+    --red: var(--color-red-light);
+    --marker: var(--color-sand);
+    --slot: var(--color-stone);
+    --slot-light: var(--color-stone-light);
+    --slot-dark: var(--color-stone-dark);
+}
+

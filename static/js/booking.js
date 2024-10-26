@@ -13,10 +13,10 @@ function addSlot(event) {
 
     if (index === -1) {
         reservations.push(reservation);
-        slot.style.backgroundColor = "#4488ff";
+        slot.classList.add('marked');
     } else {
         reservations.splice(index, 1);
-        slot.style.backgroundColor = "";
+        slot.classList.remove('marked');
     }
 
     const book = document.getElementById('book');
@@ -30,7 +30,7 @@ function addSlot(event) {
 function validateApartment() {
     const apartment = document.getElementById('apartment')
     if (apartment.value < apartment.min || apartment.value > apartment.max) {
-        alert(`Please enter an apartment number between ${apartment.min} and ${apartment.max}.`);
+        console.log(`Please enter an apartment number between ${apartment.min} and ${apartment.max}.`);
         return false;
     } else {
         return true;
@@ -41,10 +41,10 @@ function bookSlots() {
     const apartment = document.getElementById('apartment').value;
     const week = document.getElementById('week').dataset.week;
     if (reservations.length === 0) {
-        alert("You haven't selected any reservation slots.");
+        console.log("You haven't selected any reservation slots.");
     }
     else if (apartment === '') {
-        alert("You haven't typed in your apartment number.");
+        console.log("You haven't typed in your apartment number.");
     } else {
         preferences['apartment'] = apartment;
         const data = {
@@ -61,8 +61,7 @@ function bookSlots() {
         })
         .then(response => response.json())
         .then(data => {
-            alert('Your reservations were saved.');
-            console.log('Success:', data);
+            console.log('Your reservations were saved.');
             location.reload(true);
         })
         .catch((error) => {
@@ -97,8 +96,10 @@ async function updateReservedSlots() {
     data.forEach(function(reservation) {
         const selector = `.slot[data-interval="${reservation.interval}"][data-machine="${reservation.machine}"][data-day="${reservation.day}"]`;
         const slot = document.querySelector(selector);
-        slot.classList.add('reserved');
-        slot.textContent = reservation.apartment;
-        slot.setAttribute('disabled', 'true');
+        if (slot) {
+            slot.classList.add('reserved');
+            slot.textContent = reservation.apartment;
+            slot.setAttribute('disabled', 'true');
+        }
     });
 }

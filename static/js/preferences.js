@@ -33,12 +33,14 @@ function toggleLocale() {
 function setLocale() {
     let locale = preferences['locale'];
     const button = document.getElementById('language')
-    if (locale === 'en') {
-        button.textContent = '🇩🇰';
-        button.title = 'Dansk';
-    } else if (locale === 'da') {
-        button.textContent = '🇬🇧';
-        button.title = 'English';
+    if (button) {
+        if (locale === 'en') {
+            button.textContent = '🇩🇰';
+            button.title = 'Dansk';
+        } else if (locale === 'da') {
+            button.textContent = '🇬🇧';
+            button.title = 'English';
+        }
     }
 }
 
@@ -91,7 +93,7 @@ function setApartmentPreference() {
     function validateApartment() {
         const apartment = document.getElementById('apartment')
         if (apartment.value < apartment.min || apartment.value > apartment.max) {
-            alert(`Please enter an apartment number between ${apartment.min} and ${apartment.max}.`);
+            console.log(`Please enter an apartment number between ${apartment.min} and ${apartment.max}.`);
             return false;
         } else {
             return true;

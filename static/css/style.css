@@ -1,3 +1,5 @@
+@import url("colors.css");
+
 * {
     border: 0;
     padding: 0;
@@ -234,4 +236,7 @@ button.slot.reserved:hover {
 .cancel-reservation > span:hover, .cancel-all-reservations:hover {
     cursor: pointer;
     filter: brightness(1.1);
+}
+.marked {
+    background-color: #44aaff !important;
 }

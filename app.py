@@ -51,9 +51,23 @@ def get_week_dates(timezone, target_week):
     pylocale.setlocale(pylocale.LC_TIME, 'C')
     return formatted_monday, formatted_sunday
 
-def get_weekday_date(timezone, week, day):
-    # TODO: Finish function (for mobile booking page)
-    return
+def get_weekday_date(timezone, target_week, target_day):
+    now = datetime.now(timezone)
+    current_week = now.isocalendar()[1]
+    year = now.year
+    if target_week < current_week:
+        year += 1
+    target_date = datetime.fromisocalendar(year, target_week, 1).replace(tzinfo=timezone)
+    target_date += timedelta(days=target_day)
+    locale = get_locale()
+    if locale == 'da':
+        pylocale.setlocale(pylocale.LC_TIME, 'da_DK.UTF-8')
+        formatted_day = target_date.strftime("%d. %B")
+    else:
+        pylocale.setlocale(pylocale.LC_TIME, 'en_US.UTF-8')
+        formatted_day = target_date.strftime("%B %d")
+    pylocale.setlocale(pylocale.LC_TIME, 'C')
+    return formatted_day
     
 def week_cap(current_week: int, week: int):
     if (week > current_week+2):
@@ -115,8 +129,9 @@ def booking():
         if parsed_user_agent.is_mobile:
             today = int(datetime.now(timezone).isoweekday())
             day = int(request.args.get('day', default=today, type=int))
+            date = get_weekday_date(timezone, week, day)
             
-            return render_template('booking_mobile.html', active='booking', reservations=reservations, week=week, week_start=week_start, week_end=week_end, apartment=apartment, locale=get_locale(), session=session_check(), day=day)
+            return render_template('booking_mobile.html', active='booking', reservations=reservations, week=week, current_week=current_week, week_start=week_start, week_end=week_end, apartment=apartment, locale=get_locale(), session=session_check(), day=day, date=date)
         return render_template('booking.html', active='booking', reservations=reservations, week=week, week_start=week_start, week_end=week_end, apartment=apartment, locale=get_locale(), session=session_check())
     else:
         return redirect('/login')
@@ -265,8 +280,9 @@ def format_interval_filter(value, position=None):
     return f'{start} - {end}'
 
 @app.template_filter('format_day')
-def format_day_filter(day):
-    formatted_day = localize(day+24)
+def format_day_filter(day, **kwargs):
+    locale = get_locale()
+    formatted_day = localize(day+24, locale=locale)
     return formatted_day
 
 @app.template_filter('format_week_interval')

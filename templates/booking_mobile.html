@@ -6,10 +6,80 @@
 {% block content %}
 <main>
     <header>
-        <h2 id="week" data-week="{{week}}">{{ 23 | localize(locale=locale) }} {{ week }}</h2>
-        <p>WEEKDAY DATE</p>
-        <h2>{{day | format_day }}</h2>
+        <button onclick="showDialog('week-picker')" id="week" data-week="{{week}}">{{ 23 | localize(locale=locale) }} {{ week }}</button>
+        <p>{{date}}</p>
+        <button onclick="showDialog('day-picker')" id="weekday">{{day | format_day }}</button onclick="showDialog('day-picker')">
     </header>
+    <dialog id="week-picker">
+        <button class="close-dialog" onclick="closeDialog('week-picker')"><span class="material-icons">close</span></button>
+        <section class="dialog-list">
+            <form action="{{ url_for('booking') }}" method="get">
+                <input type="hidden" name="week" value="{{ current_week }}">
+                <input type="hidden" name="day" value="1">
+                <button class="{% if week == current_week %}active{% endif %}" type="submit">{{ 23 | localize(locale=locale) }} {{ current_week }}</button>
+            </form>
+            <form action="{{ url_for('booking') }}" method="get">
+                <input type="hidden" name="week" value="{{ current_week+1 }}">
+                <input type="hidden" name="day" value="1">
+                <button class="{% if week == current_week+1 %}active{% endif %}" type="submit">{{ 23 | localize(locale=locale) }} {{ current_week+1 }}</button>
+            </form>
+            <form action="{{ url_for('booking') }}" method="get">
+                <input type="hidden" name="week" value="{{ current_week+2 }}">
+                <input type="hidden" name="day" value="1">
+                <button class="{% if week == current_week+2 %}active{% endif %}" type="submit">{{ 23 | localize(locale=locale) }} {{ current_week+2 }}</button>
+            </form>
+            <form action="{{ url_for('booking') }}" method="get">
+                <input type="hidden" name="week" value="{{ current_week+3 }}">
+                <input type="hidden" name="day" value="1">
+                <button class="{% if week == current_week+3 %}active{% endif %}" type="submit">{{ 23 | localize(locale=locale) }} {{ current_week+3 }}</button>
+            </form>
+            <form action="{{ url_for('booking') }}" method="get">
+                <input type="hidden" name="week" value="{{ current_week+4 }}">
+                <input type="hidden" name="day" value="1">
+                <button class="{% if week == current_week+4 %}active{% endif %}" type="submit">{{ 23 | localize(locale=locale) }} {{ current_week+4 }}</button>
+            </form>
+            </section>
+    </dialog>
+    <dialog id="day-picker">
+        <button class="close-dialog" onclick="closeDialog('day-picker')"><span class="material-icons">close</span></button>
+        <section class="dialog-list">
+            <form action="{{ url_for('booking') }}" method="get">
+                <input type="hidden" name="week" value="{{ week }}">
+                <input type="hidden" name="day" value="1">
+                <button class="{% if day == 1 %}active{% endif %}" type="submit">{{1 | format_day(locale=locale) }}</button>
+            </form>
+            <form action="{{ url_for('booking') }}" method="get">
+                <input type="hidden" name="week" value="{{ week }}">
+                <input type="hidden" name="day" value="2">
+                <button class="{% if day == 2 %}active{% endif %}" type="submit">{{2 | format_day(locale=locale) }}</button>
+            </form>
+            <form action="{{ url_for('booking') }}" method="get">
+                <input type="hidden" name="week" value="{{ week }}">
+                <input type="hidden" name="day" value="3">
+                <button class="{% if day == 3 %}active{% endif %}" type="submit">{{3 | format_day(locale=locale) }}</button>
+            </form>
+            <form action="{{ url_for('booking') }}" method="get">
+                <input type="hidden" name="week" value="{{ week }}">
+                <input type="hidden" name="day" value="4">
+                <button class="{% if day == 4 %}active{% endif %}" type="submit">{{4 | format_day(locale=locale) }}</button>
+            </form>
+            <form action="{{ url_for('booking') }}" method="get">
+                <input type="hidden" name="week" value="{{ week }}">
+                <input type="hidden" name="day" value="5">
+                <button class="{% if day == 5 %}active{% endif %}" type="submit">{{5 | format_day(locale=locale) }}</button>
+            </form>
+            <form action="{{ url_for('booking') }}" method="get">
+                <input type="hidden" name="week" value="{{ week }}">
+                <input type="hidden" name="day" value="6">
+                <button class="{% if day == 6 %}active{% endif %}" type="submit">{{6 | format_day(locale=locale) }}</button>
+            </form>
+            <form action="{{ url_for('booking') }}" method="get">
+                <input type="hidden" name="week" value="{{ week }}">
+                <input type="hidden" name="day" value="7">
+                <button class="{% if day == 7 %}active{% endif %}" type="submit">{{7 | format_day(locale=locale) }}</button>
+            </form>
+        </section>
+    </dialog>
     <section class="annotations">
         <p>{{ 37 | localize(locale=locale) }}</p>
         <p>1</p>
@@ -39,6 +109,7 @@
         <button type="submit" id="book" onclick="setApartmentPreference();bookSlots()">{{ 10 | localize(locale=locale) }}</button>
 </main>
 <script src="{{ url_for('static', filename='js/booking.js') }}"></script>
+<script src="{{ url_for('static', filename='js/booking_mobile.js') }}"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         updateReservedSlots();

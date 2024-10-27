@@ -17,6 +17,7 @@ main {
 }
 header {
     display: flex;
+    height: 4vh;
     width: 100%;
     margin-bottom: 0.5rem;
     align-items: center;
@@ -26,10 +27,18 @@ header {
 header > * {
     padding: 0.5rem;
     text-align: center;
+    user-select: none;
+    touch-action: none;
 }
 header p {
     font-size: 0.8rem;
     font-weight: 600;
+}
+header button {
+    font-size: 1.2rem;
+    border: 0;
+    background: 0;
+    color: var(--primary);
 }
 nav {
     position: absolute;
@@ -119,7 +128,7 @@ nav a span.material-icons {
     width: calc(100% - 1.5rem);
     background: grey;
     color: lightgray;
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-weight: 700;
     text-transform: uppercase;
     border: 0;
@@ -142,4 +151,59 @@ button[data-interval="19"],
 button[data-interval="21"],
 button[data-interval="23"] {
     background: var(--slot-light);
+}
+
+dialog {
+    max-width: 100vw;
+    width: 100%;
+    height: 90vh;
+    margin-top: calc(4vh);
+    margin-bottom: calc(6vh);
+    box-sizing: border-box;
+    color: var(--primary);
+    border: 0;
+    background: rgba(0,0,0,0.9);
+    font-size: 2rem;
+    border-bottom: 0.2rem solid var(--primary);
+    border-top: 0.2rem solid var(--primary);
+
+}
+dialog:modal {
+    display: flex;
+    flex-direction: column;
+    align-items: center;;
+    justify-content: center;
+}
+.close-dialog {
+    border: 0;
+    padding: 0.5rem;
+    padding: 0.5rem;
+}
+dialog button {
+    padding: 0.5rem;
+    display: flex;
+    align-self: flex-end;
+    justify-content: flex-end;
+    background: var(--primary);
+}
+dialog button span {
+    background: var(--primary);
+    color: var(--background);
+}
+.dialog-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+.dialog-list form {
+    margin: 0.5rem;
+}
+.dialog-list form button {
+    border: 0;
+    background: 0;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--primary);
 }

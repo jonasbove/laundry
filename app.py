@@ -150,7 +150,16 @@ def reservations():
    
 @app.route("/settings")
 def settings():
-    return 'Not made yet lol' 
+    if 'authorized' in session:
+        user_agent = request.headers.get('User-Agent')
+        parsed_user_agent = parse(user_agent)
+        if parsed_user_agent.is_mobile:
+            apartment = session.get('apartment')
+            return render_template('settings_mobile.html', apartment=apartment, active='settings')
+        else:
+            return 'Not made yet, lol 🤣'
+    else:
+        return redirect('/login')
 
 @app.route("/robots.txt")
 def robots_txt():

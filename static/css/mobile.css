@@ -207,3 +207,43 @@ dialog button span {
     font-weight: 300;
     color: var(--primary);
 }
+#settings {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: calc( 94vh - 0.2rem );
+    overflow-y: hidden;
+    align-items: center;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+#settings > * {
+    margin: 0.5rem;
+}
+#settings label {
+    font-size: 2rem;
+}
+#settings input[type="number"] {
+    appearance: textfield;
+    padding: 1rem 2rem;
+    background: 0;
+    color: var(--primary);
+    border: 0.2rem solid var(--primary);
+    font-size: 1.5rem;
+    text-align: center;
+}
+#settings button {
+    padding: 1.2rem 1.6rem;
+    border: 0;
+    color: var(--primary);
+    font-weight: 500;
+    font-size: 1.2rem;
+    background-color: var(--green);
+}
+#confirmation {
+    font-size: 2rem;
+    margin: 0.2rem;
+}
+.hidden {
+    visibility: hidden;
+}

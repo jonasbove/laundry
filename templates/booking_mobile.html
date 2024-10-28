@@ -104,7 +104,7 @@
             <p class="interval">{{ interval | format_interval(position='end') }}</p>
         {% endfor %}
     </section>
-        <h3 class="apartment">{{ 34 | localize(locale=locale) }} {% if apartment %}{{apartment}}{% else %}#{% endif %}</h3>
+        <h3 class="apartment">{% if apartment %}{{ 34 | localize(locale=locale) }} {{apartment}}{% else %}{{ 40 | localize(locale=locale) }}{% endif %}</h3>
         <input type="hidden" name="apartment" id="apartment" {% if apartment %}value="{{apartment}}"{% endif %}>
         <button type="submit" id="book" onclick="setApartmentPreference();bookSlots()">{{ 10 | localize(locale=locale) }}</button>
 </main>

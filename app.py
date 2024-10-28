@@ -58,7 +58,7 @@ def get_weekday_date(timezone, target_week, target_day):
     if target_week < current_week:
         year += 1
     target_date = datetime.fromisocalendar(year, target_week, 1).replace(tzinfo=timezone)
-    target_date += timedelta(days=target_day)
+    target_date += timedelta(days=target_day-1)
     locale = get_locale()
     if locale == 'da':
         pylocale.setlocale(pylocale.LC_TIME, 'da_DK.UTF-8')

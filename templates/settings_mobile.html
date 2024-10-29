@@ -7,11 +7,23 @@
     <section id="settings">
         <label for="apartment">{{ 12 | localize(locale=locale) }}</label>
         <input type="number" min="140" max ="160" length="3" name="apartment" id="apartment" {% if apartment %}value="{{apartment}}"{% endif %}>
-        <button type="submit" onclick="setApartmentPreference();updateApartment();confirmSettings()">{{ 39 | localize(locale=locale) }}</button>
+        <label for="lang">Language</label>
+        <select name="lang" id="lang">
+            <option value="en">English</option>
+            <option value="da">Danish</option>
+        </select>
+        <label for="theme">Theme</label>
+        <select name="theme" id="theme">
+            <option value="dark">Dark mode</option>
+            <option value="light">Light mode</option>
+        </select>
+        <button type="submit" onclick="saveSettings()">{{ 39 | localize(locale=locale) }}</button>
         <p id="confirmation" class="hidden">✅</p>
     </section>
     <script>
         function confirmSettings() {
+            setApartmentPreference();
+            updateApartment();
             elem = document.getElementById('confirmation');
             elem.classList.remove('hidden');
             setTimeout(() => { elem.classList.add('hidden') }, 5000);

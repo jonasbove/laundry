@@ -107,3 +107,12 @@ function setApartmentPreference() {
         console.log('No apartment number entered');
     }
 }
+
+function saveSettings() {
+    const apartment = document.getElementById('apartment').value;
+    const language = document.getElementById('language').value;
+    const theme = document.getElementById('theme').value;
+    setPreference('apartment', apartment);
+    setPreference('locale', language);
+    setPreference('theme', theme);
+}

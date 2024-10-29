@@ -242,6 +242,23 @@ dialog button span {
     font-size: 1.2rem;
     background-color: var(--green);
 }
+#settings select {
+    padding: 1rem;
+    background: 0;
+    color: var(--primary);
+    border: 0.2rem solid var(--primary);
+    appearance:none;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+}
+
+#settings select option {
+    background: var(--background);
+    color: var(--primary);
+    border: 0;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+}
 #confirmation {
     font-size: 2rem;
     margin: 0.2rem;

@@ -7,26 +7,16 @@
     <section id="settings">
         <label for="apartment">{{ 12 | localize(locale=locale) }}</label>
         <input type="number" min="140" max ="160" length="3" name="apartment" id="apartment" {% if apartment %}value="{{apartment}}"{% endif %}>
-        <label for="lang">Language</label>
+        <label for="lang">{{ 42 | localize(locale=locale) }}</label>
         <select name="lang" id="lang">
-            <option value="en">English</option>
-            <option value="da">Danish</option>
+            <option value="en">{{ 15 | localize(locale=locale) }}</option>
+            <option value="da">{{ 16 | localize(locale=locale) }}</option>
         </select>
-        <label for="theme">Theme</label>
+        <label for="theme">{{ 41 | localize(locale=locale) }}</label>
         <select name="theme" id="theme">
-            <option value="dark">Dark mode</option>
-            <option value="light">Light mode</option>
+            <option value="dark">{{ 13 | localize(locale=locale) }}</option>
+            <option value="light">{{ 14 | localize(locale=locale) }}</option>
         </select>
         <button type="submit" onclick="saveSettings()">{{ 39 | localize(locale=locale) }}</button>
-        <p id="confirmation" class="hidden">✅</p>
     </section>
-    <script>
-        function confirmSettings() {
-            setApartmentPreference();
-            updateApartment();
-            elem = document.getElementById('confirmation');
-            elem.classList.remove('hidden');
-            setTimeout(() => { elem.classList.add('hidden') }, 5000);
-        }
-    </script>
 {% endblock %}

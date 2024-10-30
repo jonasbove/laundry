@@ -14,7 +14,7 @@
     --color-stone-light: #DAD9DD;
     --color-stone-dark: #C5C4CA;
 }
-body.dark-mode {
+body.dark {
     --background: var(--color-dark);
     --primary: var(--color-light);
     --green: var(--color-green);
@@ -24,7 +24,7 @@ body.dark-mode {
     --slot-light: var(--color-tile-light);
     --slot-dark: var(--color-tile-dark);
 }
-body.light-mode {
+body.light {
     --background: var(--color-light);
     --primary: var(--color-dark);
     --green: var(--color-green-light);

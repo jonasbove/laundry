@@ -110,9 +110,45 @@ function setApartmentPreference() {
 
 function saveSettings() {
     const apartment = document.getElementById('apartment').value;
-    const language = document.getElementById('language').value;
+    const language = document.getElementById('lang').value;
     const theme = document.getElementById('theme').value;
     setPreference('apartment', apartment);
     setPreference('locale', language);
     setPreference('theme', theme);
+    return fetch('/save-settings', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ apartment: apartment, language: language, theme: theme })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Settings updated:', data);
+    })
+    .catch(error => {
+        console.error('Error updating settings:', error);
+    }).then(() => {
+        window.location.reload();
+    });
+}
+
+function updateSettings() {
+    const apartment = localStorage.getItem('apartment');
+    const language = localStorage.getItem('locale');
+    const theme = localStorage.getItem('theme');
+    return fetch('/save-settings', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ apartment: apartment, language: language, theme: theme })
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Settings updated:', data);
+    })
+    .catch(error => {
+        console.error('Error updating settings:', error);
+    })
 }

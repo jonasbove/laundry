@@ -68,7 +68,7 @@ def get_weekday_date(timezone, target_week, target_day):
         formatted_day = target_date.strftime("%B %d")
     pylocale.setlocale(pylocale.LC_TIME, 'C')
     return formatted_day
-    
+
 def week_cap(current_week: int, week: int):
     if (week > current_week+2):
         week = current_week+2
@@ -79,7 +79,11 @@ def week_cap(current_week: int, week: int):
 def get_locale():
     locale = session.get('locale', 'en')
     return locale
-   
+
+def get_theme():
+    theme = session.get('theme', 'dark')
+    return theme
+
 def is_mobile_user():
     user_agent = request.headers.get('User-Agent')
     parsed_user_agent = parse(user_agent)
@@ -131,7 +135,7 @@ def booking():
             day = int(request.args.get('day', default=today, type=int))
             date = get_weekday_date(timezone, week, day)
             
-            return render_template('booking_mobile.html', active='booking', reservations=reservations, week=week, current_week=current_week, week_start=week_start, week_end=week_end, apartment=apartment, locale=get_locale(), session=session_check(), day=day, date=date)
+            return render_template('booking_mobile.html', active='booking', reservations=reservations, week=week, current_week=current_week, week_start=week_start, week_end=week_end, apartment=apartment, locale=get_locale(), theme=get_theme(), session=session_check(), day=day, date=date)
         return render_template('booking.html', active='booking', reservations=reservations, week=week, week_start=week_start, week_end=week_end, apartment=apartment, locale=get_locale(), session=session_check())
     else:
         return redirect('/login')
@@ -155,7 +159,7 @@ def settings():
         parsed_user_agent = parse(user_agent)
         if parsed_user_agent.is_mobile:
             apartment = session.get('apartment')
-            return render_template('settings_mobile.html', apartment=apartment, active='settings')
+            return render_template('settings_mobile.html', apartment=apartment, active='settings', theme=get_theme())
         else:
             return 'Not made yet, lol 🤣'
     else:
@@ -228,6 +232,31 @@ def set_apartment():
             session['apartment'] = apartment
             
         return jsonify({'apartment': apartment})
+    else:
+        return redirect('/login')
+    
+@app.route('/save-settings', methods=['POST'])
+def save_settings():
+    if 'authorized' in session:
+        data = request.get_json()
+        apartment = data.get('apartment', False)
+        language = data.get('language', 'en')
+        theme = data.get('theme', 'dark')
+
+        if apartment:
+            session['apartment'] = apartment
+        if language:
+            session['locale'] = language
+        if theme:
+            session['theme'] = theme
+            
+        return jsonify({
+        'status': 'success',
+        'message': 'Settings updated',
+        'apartment': apartment,
+        'language': language,
+        'theme': theme
+        }), 200
     else:
         return redirect('/login')
 

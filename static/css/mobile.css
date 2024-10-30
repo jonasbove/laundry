@@ -207,7 +207,7 @@ dialog button span {
     background: 0;
     font-size: 1.8rem;
     font-weight: 300;
-    color: var(--primary);
+    color: var(--color-light);
 }
 #settings {
     display: flex;
@@ -237,8 +237,8 @@ dialog button span {
 #settings button {
     padding: 1.2rem 1.6rem;
     border: 0;
-    color: var(--primary);
-    font-weight: 500;
+    color: var(--color-light);
+    font-weight: 600;
     font-size: 1.2rem;
     background-color: var(--green);
 }

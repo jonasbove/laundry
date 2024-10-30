@@ -13,15 +13,14 @@
     <script src="{{ url_for('static', filename='js/preferences.js') }}"></script>
     {% if not session %}
     <script>
-        updateLocale()
-        .then(() => updateApartment())
+        updateSettings()
         .then(() => {
             window.location.reload();
         });
     </script>
     {% endif %}
 </head>
-<body class="dark-mode">
+<body class="{{theme}}">
     {% set locale = request.args.get('lang', 'en') %}
     {% block content %}{% endblock %}
     <nav>

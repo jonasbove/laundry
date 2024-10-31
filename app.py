@@ -94,7 +94,7 @@ def is_mobile_user():
     
 def session_check():
         check = True
-        if 'locale' not in session:
+        if 'authorized' not in session:
             check = False
         return check
 # Routes
